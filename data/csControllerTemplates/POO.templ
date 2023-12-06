@@ -1,0 +1,19 @@
+##import## ##mvc-package####line-end##
+
+##namespace## #package-value#
+##bracket-start##
+    ##annotation-start###api-annotation###annotation-end##
+    ##annotation-start###route-annotation###annotationbracketstart##"#controller#"##annotationbracketend####annotation-end##
+
+    ##class-encaps## ##class## #class-name#Controller : #controlparent#
+    ##bracket-start##
+
+        ##annotation-start###httpGet-annotation###annotationbracketstart###Http-name-key# = "#class-name#s"##annotationbracketend####annotation-end##
+        ##rest-method-encaps## #ienumerable#<#class-name#> #get-method#()
+        ##bracket-start##
+            #return# #null###line-end##
+        ##bracket-end##
+
+    ##bracket-end##
+
+##bracket-end##

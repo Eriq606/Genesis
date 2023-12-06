@@ -61,4 +61,19 @@ public class Langage {
         }
         return template;
     }
+
+    public CsControllerTemplate getCsControllerTemplate(Constantes constantes) throws FileNotFoundException{
+        String path=constantes.getConfigs().get("template-dir");
+        File templdir=new File(path);
+        File[] tempFiles=templdir.listFiles();
+        CsControllerTemplate template=new CsControllerTemplate();
+        for(int i=0;i<tempFiles.length;i++){
+            if(tempFiles[i].getName().substring(0, tempFiles[i].getName().length()-constantes.getConfigs().get("template-ext").length()).equals(getParams().get("template-model"))){
+                template.setStructure(FileUtils.getFileContent(tempFiles[i]).replace("#", ""));
+            }else if(tempFiles[i].getName().substring(0, tempFiles[i].getName().length()-constantes.getConfigs().get("template-ext").length()).contains(getParams().get("template-model"))){
+                template.setAttrBehavior(FileUtils.getFileContent(tempFiles[i]).replace("#", ""));   
+            }
+        }
+        return template;
+    }
 }
