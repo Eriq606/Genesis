@@ -1,9 +1,12 @@
+package voiture.src;
+
 import java.sql.Connection;
 import java.util.Scanner;
 
+
 public class App {
     public static void main(String[] args) throws Exception {
-        Constantes constantes=new Constantes();
+        voiture.src.Constantes constantes=new Constantes();
         Langage[] langages=Langage.getAllLangages(constantes);
         Scanner scan=new Scanner(System.in);
         System.out.print("Username: ");
