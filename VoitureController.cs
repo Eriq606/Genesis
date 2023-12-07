@@ -14,6 +14,24 @@ namespace Controllers
             return null;
         }
 
+        [HttpPost(Name = "Voitures")]
+        public void Post()
+        {
+
+        }
+
+        [HttpPut(Name = "Voitures")]
+        public void Put(string id)
+        {
+        
+        }
+
+        [HttpDelete(Name = "Voitures")]
+        public void Delete(string id)
+        {
+        
+        }
+
     }
 
 }
