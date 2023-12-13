@@ -6,7 +6,7 @@ public class Connexion {
 
     public static Connection getMysqlConnexion(String db_name, String host, String port, String user, String password) throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.jdbc.Driver");
-        Connection c = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + db_name+"?user="+user+"&password="+password+"&useSSL=false", user, password);
+        Connection c = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + db_name+"?user="+user+"&password="+password+"&useSSL=false&serverTimezone=UTC", user, password);
         c.setAutoCommit(false);
         return c;
     }

@@ -14,10 +14,13 @@ public class DBEntity {
         File paramFile=new File(constantes.getConfigs().get("db-dir")+nom+constantes.getConfigs().get("db-ext"));
         Scanner scan=new Scanner(paramFile);
         try{
+            String line=null;
+            String[] params=null;
+            String paramValue=null;
             while(scan.hasNextLine()){
-                String line=scan.nextLine();
-                String[] params=line.split("=");
-                String paramValue=params[1].substring(1, params[1].length()-1).trim();
+                line=scan.nextLine();
+                params=line.split("=");
+                paramValue=params[1].substring(1, params[1].length()-1).trim();
                 getParams().put(params[0], paramValue);
             }
         }finally{
@@ -42,5 +45,8 @@ public class DBEntity {
     public void setDb(int db) {
         this.db = db;
     }
-    
+    public String[] getAllExcludedTables(){
+        String excluded=getParams().get("excludedtables");
+        return excluded.split(",");
+    }
 }

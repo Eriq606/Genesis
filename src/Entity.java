@@ -3,6 +3,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 @SuppressWarnings({"unchecked"})
@@ -37,23 +38,48 @@ public class Entity {
         statement.setString(1, entityName);
         try{
             Entity entity=null;
-            ResultSet result=statement.executeQuery();
-            for(int i=0;result.next();i++){
-                if(i==0){
-                    entity=new Entity();
-                    entity.setEntityName(result.getString(2));
-                    entity.setPackageName(result.getString(1));
+            try(ResultSet result=statement.executeQuery()){
+                for(int i=0;result.next();i++){
+                    if(i==0){
+                        entity=new Entity();
+                        entity.setEntityName(result.getString(2));
+                        entity.setPackageName(result.getString(1));
+                    }
+                    entity.field_type.put(result.getString(3), result.getString(4));
                 }
-                entity.field_type.put(result.getString(3), result.getString(4));
+                entity.setField_type(entity.getSimpleTypeCorrespField(dbentity));
+                entity.setField_type(entity.getLanguageTypeCorrespField(langage));
             }
-            entity.setField_type(entity.getSimpleTypeCorrespField(dbentity));
-            entity.setField_type(entity.getLanguageTypeCorrespField(langage));
             return entity;
         }finally{
             statement.close();
             if(opened){
                 connect.close();
             }
+        }
+    }
+    public static String[] getAllEntityNames(DBEntity dbEntity, Connection connex) throws Exception{
+        String[] excluded=dbEntity.getAllExcludedTables();
+        String query="select distinct %s from information_schema.tables where "+dbEntity.getParams().get("table-type")+"<>'VIEW'";
+        for(int i=0;i<excluded.length;i++){
+            query+=" and "+dbEntity.getParams().get("table-schema")+"<>'"+excluded[i]+"'";
+        }
+        query=String.format(query, dbEntity.getParams().get("table-name"));
+        PreparedStatement statement=connex.prepareStatement(query);
+        try{
+            LinkedList<String> liste=new LinkedList<>();
+            try(ResultSet result=statement.executeQuery()){
+                while(result.next()){
+                    liste.add(result.getString(dbEntity.getParams().get("table-name")));
+                }
+            }
+            String[] strings=new String[liste.size()];
+            for(int i=0;i<strings.length;i++){
+                strings[i]=liste.get(i);
+            }
+            return strings;
+        }finally{   
+            statement.close();
         }
     }
     private HashMap<String, String> getSimpleTypeCorrespField(DBEntity dbentity) {

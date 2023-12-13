@@ -11,10 +11,13 @@ public class Constantes {
         File conf=new File("data/app.config");
         Scanner scan=new Scanner(conf);
         try{
+            String line=null;
+            String[] confs=null;
+            String confValue=null;
             while(scan.hasNextLine()){
-                String line=scan.nextLine();
-                String[] confs=line.split("=");
-                String confValue=confs[1].substring(1, confs[1].length()-1).trim();
+                line=scan.nextLine();
+                confs=line.split("=");
+                confValue=confs[1].substring(1, confs[1].length()-1).trim();
                 configs.put(confs[0], confValue);
             }
         }finally{

@@ -58,6 +58,8 @@ public class Template {
         setAttrBehavior(formattedAttr);
     }
     public File generate(Entity entity, Constantes constantes, Langage langage) throws IOException{
-        return FileUtils.createFile(".", StringUtils.majStart(entity.getEntityName())+constantes.getConfigs().get(langage.getNom()+"-ext"), getStructure());
+        File savedir=new File(constantes.getConfigs().get("savepath"));
+        savedir.mkdir();
+        return FileUtils.createFile(constantes.getConfigs().get("savepath"), StringUtils.majStart(entity.getEntityName())+constantes.getConfigs().get(langage.getNom()+"-ext"), getStructure());
     }
 }

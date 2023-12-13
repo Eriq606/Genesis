@@ -28,10 +28,17 @@ public class App {
         Template temps=langages[indexLang-1].getTemplate(constantes);
         Connection connex=(Connection) Connexion.class.getMethod("get"+sgbd+"Connexion", String.class, String.class, String.class, String.class, String.class).invoke(Connexion.class, dbname, host, port, username, pwd);
         DBEntity dbentity=new DBEntity(sgbd, constantes);
-        Entity entity=Entity.getEntity(dbentity, connex, entityName, langages[indexLang-1]);
+        String[] entityNames={entityName};
+        if(entityName.equals("*")){
+            entityNames=Entity.getAllEntityNames(dbentity, connex);
+        }
+        Entity entity=null;
         try{
-            temps.formatStructure(langages[indexLang-1], entity);
-            temps.generate(entity, constantes, langages[indexLang-1]);
+            for(int i=0;i<entityNames.length;i++){
+                entity=Entity.getEntity(dbentity, connex, entityNames[i], langages[indexLang-1]);
+                temps.formatStructure(langages[indexLang-1], entity);
+                temps.generate(entity, constantes, langages[indexLang-1]);
+            }
         }finally{
             scan.close();
             connex.close();
