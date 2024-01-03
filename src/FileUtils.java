@@ -24,4 +24,21 @@ public class FileUtils {
             return file;
         }
     }
+    public static String toRemoveGodaoTable(String structure, Langage langage){
+        String newStruct=structure;
+        boolean usingVeda=Boolean.valueOf(langage.getParams().get("using-veda"));
+        if(usingVeda==false){
+            newStruct=newStruct.replace("##import## ##godao-package####line-end##", "");
+            newStruct=newStruct.replace("##annotation-start####godao-table####annotationbracketstart##\"#class-name#\"##annotationbracketend####annotation-end##", "");
+        }
+        return newStruct;
+    }
+    public static String toRemoveGodaoColumn(String structure, Langage langage){
+        String newStruct=structure;
+        boolean usingVeda=Boolean.valueOf(langage.getParams().get("using-veda"));
+        if(usingVeda==false){
+            newStruct=newStruct.replace("##annotation-start####godao-column####annotationbracketstart###\"field-name\"###annotationbracketend##annotation-end##", "");
+        }
+        return newStruct;
+    }
 }

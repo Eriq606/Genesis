@@ -8,7 +8,7 @@ public class Constantes {
     
     public Constantes() throws FileNotFoundException{
         configs=new HashMap<>();
-        File conf=new File("data/app.config");
+        File conf=new File("data_genesis/app.config");
         Scanner scan=new Scanner(conf);
         try{
             String line=null;

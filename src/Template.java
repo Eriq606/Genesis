@@ -1,7 +1,6 @@
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
-import veda.godao.utils.StringUtils;
 
 public class Template {
     private String structure;
