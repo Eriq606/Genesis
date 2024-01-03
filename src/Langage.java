@@ -54,9 +54,9 @@ public class Langage {
         Template template=new Template();
         for(int i=0;i<tempFiles.length;i++){
             if(tempFiles[i].getName().substring(0, tempFiles[i].getName().length()-constantes.getConfigs().get("template-ext").length()).equals(getParams().get("template-model"))){
-                template.setStructure(FileUtils.getFileContent(tempFiles[i]).replace("#", ""));
+                template.setStructure(FileUtils.toRemoveGodaoTable(FileUtils.getFileContent(tempFiles[i]), this).replace("#", ""));
             }else if(tempFiles[i].getName().substring(0, tempFiles[i].getName().length()-constantes.getConfigs().get("template-ext").length()).contains(getParams().get("template-model"))){
-                template.setAttrBehavior(FileUtils.getFileContent(tempFiles[i]).replace("#", ""));   
+                template.setAttrBehavior(FileUtils.toRemoveGodaoColumn(FileUtils.getFileContent(tempFiles[i]), this).replace("#", ""));   
             }
         }
         return template;

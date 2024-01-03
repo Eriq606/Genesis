@@ -1,0 +1,27 @@
+import eriq.flamework.annotations.Controller;
+import eriq.flamework.annotations.URLMapping;
+import eriq.flamework.model.ModelRedirect;
+import eriq.flamework.model.ModelView;
+import eriq.flamework.servlet.ServletEntity;
+@Controller
+##class-encaps## ##class## #class-name###controller-suffix####bracket-start##
+    ##annotation-start####flamework-urlmapping####annotationbracketstart##"##flamework-liste###class-name###flamework-urlext##"##annotationbracketend####annotation-end##
+    ##method-encaps## ##flamework-modelview## ##flamework-getall##(##flamework-servletentity## entity)throws Exception##bracket-start##
+
+    ##bracket-end##
+
+    ##annotation-start####flamework-urlmapping####annotationbracketstart##"##flamework-save###class-name###flamework-urlext##"##annotationbracketend####annotation-end##
+    ##method-encaps## ##flamework-modelredirect## ##flamework-save##(##flamework-servletentity## entity)throws Exception##bracket-start##
+        throw new Exception("Not handled method");
+    ##bracket-end##
+
+    ##annotation-start####flamework-urlmapping####annotationbracketstart##"##flamework-update###class-name###flamework-urlext##"##annotationbracketend####annotation-end##
+    ##method-encaps## ##flamework-modelredirect## ##flamework-update##(##flamework-servletentity## entity)throws Exception##bracket-start##
+        throw new Exception("Not handled method");
+    ##bracket-end##
+
+    ##annotation-start####flamework-urlmapping####annotationbracketstart##"##flamework-delete###class-name###flamework-urlext##"##annotationbracketend####annotation-end##
+    ##method-encaps## ##flamework-modelredirect## ##flamework-delete##(##flamework-servletentity## entity)throws Exception##bracket-start##
+        throw new Exception("Not handled method");
+    ##bracket-end##
+##bracket-end##

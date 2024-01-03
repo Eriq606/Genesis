@@ -1,0 +1,37 @@
+##import## ##mvc-package####line-end##
+
+##namespace## #package-value#
+##bracket-start##
+    ##annotation-start###api-annotation###annotation-end##
+    ##annotation-start###route-annotation###annotationbracketstart##"#controller#"##annotationbracketend####annotation-end##
+
+    ##class-encaps## ##class## #class-name#Controller : #controlparent#
+    ##bracket-start##
+
+        ##annotation-start###httpGet-annotation###annotationbracketstart###Http-name-key# = "#class-name#s"##annotationbracketend####annotation-end##
+        ##rest-method-encaps## #ienumerable#<#class-name#> #get-method#()
+        ##bracket-start##
+            #return# #null###line-end##
+        ##bracket-end##
+
+        ##annotation-start###httpPost-annotation###annotationbracketstart###Http-name-key# = "#class-name#s"##annotationbracketend####annotation-end##
+        ##rest-method-encaps## #void# #post-method#()
+        ##bracket-start##
+
+        ##bracket-end##
+
+        ##annotation-start###httpPut-annotation###annotationbracketstart###Http-name-key# = "#class-name#s"##annotationbracketend####annotation-end##
+        ##rest-method-encaps## #void# #put-method#(#string# id)
+        ##bracket-start##
+        
+        ##bracket-end##
+
+        ##annotation-start###httpDelete-annotation###annotationbracketstart###Http-name-key# = "#class-name#s"##annotationbracketend####annotation-end##
+        ##rest-method-encaps## #void# #delete-method#(#string# id)
+        ##bracket-start##
+        
+        ##bracket-end##
+
+    ##bracket-end##
+
+##bracket-end##

@@ -38,6 +38,16 @@ public class App {
                 entity=Entity.getEntity(dbentity, connex, entityNames[i], langages[indexLang-1]);
                 temps.formatStructure(langages[indexLang-1], entity);
                 temps.generate(entity, constantes, langages[indexLang-1]);
+                temps=langages[indexLang-1].getTemplate(constantes);
+            }
+            System.out.print("Generer Controller?(O,n) : ");
+            String toGenerate=scan.next();
+            if(toGenerate.equals("O")){
+                System.out.print("Choisir le modele de controller:\n1) Spring MVC\n2) Java Flamework\n3) C# .NET\n4) Java Servlet\n>");
+                int modele = scan.nextInt();
+                for(int i=0;i<entityNames.length;i++){
+                    ControllerUtils.generateController(entityNames[i], modele);
+                }
             }
         }finally{
             scan.close();

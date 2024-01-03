@@ -1,0 +1,24 @@
+package [package-value];
+import java.io.IOException;
+import cradle.CradleServlet;
+
+import [servlet-api].servlet.ServletException;
+import [servlet-api].servlet.http.*;
+// import [servlet-api].servlet.annotation.WebServlet;
+
+// @WebServlet(name="[controller-name]", value="[urlmapping]")
+public class [controller-name] extends [servlet-extended]{
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)throws ServletException, IOException{
+        [method-action]
+    }
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)throws ServletException, IOException{
+        // Your code here
+    }
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp)throws ServletException, IOException{
+        // Your code here
+    }
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp)throws ServletException, IOException{
+        // Your code here
+    }
+}
