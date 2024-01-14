@@ -1,3 +1,4 @@
+package glaive;
 public class Config {
     private String defaultPackage;
     private String classSavepath;

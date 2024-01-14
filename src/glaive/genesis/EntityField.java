@@ -1,3 +1,4 @@
+package glaive.genesis;
 public class EntityField {
     private String name;
     private String type;

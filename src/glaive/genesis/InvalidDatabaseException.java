@@ -1,3 +1,4 @@
+package glaive.genesis;
 public class InvalidDatabaseException extends Exception{
     private int sgbdId;
     

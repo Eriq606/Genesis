@@ -1,3 +1,4 @@
+package glaive.genesis;
 public class DBEntityField {
     private String name;
     private String type;

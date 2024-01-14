@@ -1,3 +1,4 @@
+package glaive.genesis;
 public class Constantes {
     public static final int MYSQL_ID=1;
     public static final int PSQL_ID=2;

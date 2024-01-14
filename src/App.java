@@ -2,10 +2,17 @@ import java.io.File;
 import java.sql.Connection;
 import java.util.Scanner;
 
+import glaive.Config;
+import glaive.Credentials;
+import glaive.genesis.Constantes;
+import glaive.genesis.DBEntity;
+import glaive.genesis.DatabaseInfo;
+import glaive.genesis.Entity;
+import glaive.genesis.Language;
 import handyman.Utils;
 
 public class App {
-    public static void main(String[] args) throws Exception {
+    public static void generateModels() throws Exception {
         String databases=Utils.getFileContentFromInsideJar(DatabaseInfo.class, Constantes.DATABASEINFO_PATH);
         DatabaseInfo[] databasesInfos=Utils.fromJson(DatabaseInfo[].class, databases);
         int sgbd=0;
