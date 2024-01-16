@@ -6,28 +6,6 @@ import veda.godao.annotations.PrimaryKey;
 
 @Table("look")
 public class Look {
-  @Column("datecreation")
-  private java.time.LocalDate datecreation;
-
-  public java.time.LocalDate getDatecreation() {
-    return this.datecreation;
-  }
-
-  public void setDatecreation(java.time.LocalDate datecreation) {
-    this.datecreation = datecreation;
-  }
-
-  @Column("heurevente")
-  private java.time.LocalDateTime heurevente;
-
-  public java.time.LocalDateTime getHeurevente() {
-    return this.heurevente;
-  }
-
-  public void setHeurevente(java.time.LocalDateTime heurevente) {
-    this.heurevente = heurevente;
-  }
-
   @Column("id")
   @PrimaryKey
   private Integer id;
@@ -51,14 +29,14 @@ public class Look {
     this.nom = nom;
   }
 
-  @Column("prix")
-  private Double prix;
+  @Column("heuretravail")
+  private Double heuretravail;
 
-  public Double getPrix() {
-    return this.prix;
+  public Double getHeuretravail() {
+    return this.heuretravail;
   }
 
-  public void setPrix(Double prix) {
-    this.prix = prix;
+  public void setHeuretravail(Double heuretravail) {
+    this.heuretravail = heuretravail;
   }
 }

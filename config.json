@@ -1,5 +1,7 @@
 {
+    "project":"Poketra",
     "defaultPackage":"modeles",
     "classSavepath":"./src/modeles",
-    "controllerSavepath":"./src/modeles"
+    "controllerSavepath":"./src/modeles",
+    "viewpageSavepath":"./src/modeles"
 }

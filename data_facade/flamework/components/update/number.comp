@@ -2,6 +2,4 @@
     <label for="[field-name-min]input" class="form-label">[field-name-maj]</label>
     <input type="number" step="[inputstep]" class="form-control" id="[field-name-min]input"
         aria-describedby="[field-name-min]help" name="[field-name-min]" value="<%= o.get[field-name-maj]() %>">
-    <div id="[field-name-min]help" class="form-text">[fieldhelp]
-    </div>
 </div>

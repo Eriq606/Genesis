@@ -1,7 +1,7 @@
 [
     {
         "id":1,
-        "name":"Flamework",
+        "name":"Flamework (deprecated)",
         "params":{
             "namespace":"package",
             "import":"import",
@@ -168,13 +168,149 @@
         "formwithlistTemplate":"formwithlist.templ",
         "insertTemplatePath":"components/insert",
         "updateTemplatePath":"components/update",
-        "listElementTemplate":"components/list-element.templ",
-        "listHeaderTemplate":"components/list-header.templ",
+        "listElementTemplate":"components/list-element.comp",
+        "listHeaderTemplate":"components/listeheader.comp",
         "rest":false,
         "facadeExtension":".jsp"
     },
     {
         "id":2,
+        "name":"Flamework",
+        "params":{
+            "namespace":"package",
+            "import":"import",
+            "class-encaps":"public",
+            "class":"class",
+            "bracket-start":"{",
+            "bracket-end":"}",
+            "parenthesis-start":"(",
+            "parenthesis-end":")",
+            "line-end":";",
+            "field-encaps":"private",
+            "getter-encaps":"public",
+            "getter-prefix":"get",
+            "setter-encaps":"public",
+            "setter-prefix":"set",
+            "return":"return",
+            "self":"this",
+            "dot":".",
+            "equals":"=",
+            "annotation-start":"@",
+            "annotation-end":"",
+            "void":"void",
+            "constructor-encaps":"public",
+            "controller-suffix":"Controller",
+            "throws":"throws"
+        },
+        "imports":[
+            "eriq.flamework.annotations.Controller",
+            "eriq.flamework.annotations.Singleton",
+            "eriq.flamework.annotations.URLMapping",
+            "eriq.flamework.model.ModelRedirect",
+            "eriq.flamework.model.ModelView",
+            "eriq.flamework.servlet.ServletEntity",
+            "veda.godao.DAO",
+            "handyman.Utils"
+        ],
+        "classAnnotations":[
+            "Controller",
+            "Singleton"
+        ],
+        "fields":[],
+        "constructor":{
+            "arguments":[]
+        },
+        "methods":[
+            {
+                "name":"save",
+                "returnType":"ModelRedirect",
+                "encaps":"public",
+                "arguments":[
+                    {
+                        "annotations":[],
+                        "type":"ServletEntity",
+                        "name":"entity"
+                    }
+                ],
+                "annotations":[
+                    "URLMapping(\"insert[class-name-min].do\")"
+                ],
+                "methodContent":"DAO dao=new DAO(\"[database-name]\",\"[host]\",\"[port]\", \"[user]\", \"[password]\", [useSSL], [sgbd-id]);\n[class-name-maj] objet=new [class-name-maj]();\n[instanciation-flamework]\ndao.insertWithoutPrimaryKey(null, objet);\nModelRedirect model=new ModelRedirect(\"toinsert[class-name-min].do\");\nreturn model;",
+                "throwItem":[
+                    "Exception"
+                ]
+            },
+            {
+                "name":"toCrud",
+                "returnType":"ModelView",
+                "encaps":"public",
+                "arguments":[
+                    {
+                        "annotations":[],
+                        "type":"ServletEntity",
+                        "name":"entity"
+                    }
+                ],
+                "annotations":[
+                    "URLMapping(\"tocrud[class-name-min].do\")"
+                ],
+                "methodContent":"ModelView model=new ModelView();\nmodel.setView(\"pages/layout/layout.jsp\");\nmodel.addItem(\"viewpage\", \"[class-name-min].jsp\");\nmodel.addItem(\"title\", \"[class-name-maj]\");\nDAO dao=new DAO(\"[database-name]\",\"[host]\",\"[port]\", \"[user]\", \"[password]\", [useSSL], [sgbd-id]);\n[class-name-maj][] objets=dao.select(null, [class-name-maj].class);\nmodel.addItem(\"objets\", objets);\nreturn model;",
+                "throwItem":[
+                    "Exception"
+                ]
+            },
+            {
+                "name":"update",
+                "returnType":"ModelRedirect",
+                "encaps":"public",
+                "arguments":[
+                    {
+                        "annotations":[],
+                        "type":"ServletEntity",
+                        "name":"entity"
+                    }
+                ],
+                "annotations":[
+                    "URLMapping(\"update[class-name-min].do\")"
+                ],
+                "methodContent":"DAO dao=new DAO(\"[database-name]\",\"[host]\",\"[port]\", \"[user]\", \"[password]\", [useSSL], [sgbd-id]);\n[class-name-maj] where=new [class-name-maj]();\nwhere.setId(Integer.parseInt(entity.getData().get(\"id\")));\n[class-name-maj] objet=new [class-name-maj]();\n[instanciation-flamework]\ndao.update(null, objet, where);\nModelRedirect model=new ModelRedirect(\"toupdate[class-name-min].do\");\nreturn model;",
+                "throwItem":[
+                    "Exception"
+                ]
+            },
+            {
+                "name":"delete",
+                "returnType":"ModelRedirect",
+                "encaps":"public",
+                "arguments":[
+                    {
+                        "annotations":[],
+                        "type":"ServletEntity",
+                        "name":"entity"
+                    }
+                ],
+                "annotations":[
+                    "URLMapping(\"delete[class-name-min].do\")"
+                ],
+                "methodContent":"DAO dao=new DAO(\"[database-name]\",\"[host]\",\"[port]\", \"[user]\", \"[password]\", [useSSL], [sgbd-id]);\n[class-name-maj] where=new [class-name-maj]();\nwhere.setId(Integer.parseInt(entity.getData().get(\"id\")));\ndao.delete(null, where);\nModelRedirect model=new ModelRedirect(\"toinsert[class-name-min].do\");\nreturn model;",
+                "throwItem":[
+                    "Exception"
+                ]
+            }
+        ],
+        "template":"Controller",
+        "extension":".java",
+        "facadeTemplate":"flamework",
+        "formwithlistTemplate":"formwithlist.templ",
+        "insertTemplatePath":"components/insert",
+        "updateTemplatePath":"components/update",
+        "listElementTemplate":"components/list-element.comp",
+        "listHeaderTemplate":"components/listeheader.comp",
+        "rest":false,
+        "facadeExtension":".jsp"
+    },
+    {
+        "id":3,
         "name":"Spring",
         "params":{
             "namespace":"package",

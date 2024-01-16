@@ -15,6 +15,7 @@ import glaive.DatabaseInfo;
 import glaive.Entity;
 import glaive.Language;
 import glaive.exodus.Framework;
+import glaive.facade.FormEntity;
 import handyman.Utils;
 
 public class App {
@@ -72,18 +73,18 @@ public class App {
         int frameworkId=0;
         int sgbd=0;
         String nomEntite="*";
-        System.out.println("Choisir le framework:");
-        for(int i=0;i<frameworks.length;i++){
-            System.out.println((i+1)+") "+frameworks[i].getName());
-        }
-        System.out.print("> ");
-        frameworkId=scanner.nextInt()-1;
         System.out.println("Choisir le SGBD:");
         for(int i=0; i<databasesInfos.length;i++){
             System.out.println((i+1)+") "+databasesInfos[i].getName());
         }
         System.out.print("> ");
         sgbd=scanner.nextInt()-1;
+        System.out.println("Choisir le framework:");
+        for(int i=0;i<frameworks.length;i++){
+            System.out.println((i+1)+") "+frameworks[i].getName());
+        }
+        System.out.print("> ");
+        frameworkId=scanner.nextInt()-1;
         System.out.println("Nom de l'entite:");
         System.out.print("> ");
         nomEntite=scanner.next().trim();
@@ -109,10 +110,58 @@ public class App {
             }
         }
     }
+    public static void generateViewPage(Scanner scanner) throws IOException, ClassNotFoundException, SQLException, FormatterException{
+        String frameworksFile=Utils.getFileContentFromInsideJar(Framework.class, Constantes.FRAMEWORK_PATH);
+        Framework[] frameworks=Utils.fromJson(Framework[].class, frameworksFile);
+        String databases=Utils.getFileContentFromInsideJar(DatabaseInfo.class, Constantes.DATABASEINFO_PATH);
+        DatabaseInfo[] databasesInfos=Utils.fromJson(DatabaseInfo[].class, databases);
+        String languageFileContent=Utils.getFileContentFromInsideJar(Language.class, Constantes.LANGUAGE_PATH);
+        Language[] languages=Utils.fromJson(Language[].class, languageFileContent);
+        int frameworkId=0;
+        int sgbd=0;
+        String nomEntite="*";
+        System.out.println("Choisir le SGBD:");
+        for(int i=0; i<databasesInfos.length;i++){
+            System.out.println((i+1)+") "+databasesInfos[i].getName());
+        }
+        System.out.print("> ");
+        sgbd=scanner.nextInt()-1;
+        System.out.println("Choisir le framework:");
+        for(int i=0;i<frameworks.length;i++){
+            System.out.println((i+1)+") "+frameworks[i].getName());
+        }
+        System.out.print("> ");
+        frameworkId=scanner.nextInt()-1;
+        System.out.println("Nom de l'entite:");
+        System.out.print("> ");
+        nomEntite=scanner.next().trim();
+        Framework framework=frameworks[frameworkId];
+        Credentials credentials=new Credentials();
+        credentials.init(Constantes.CREDENTIAL_PATH);
+        DatabaseInfo databaseInfo=databasesInfos[sgbd];
+        Language language=languages[frameworkId];
+        String configFile=Utils.getFileContentFromInsideJar(Config.class, Constantes.CONFIG_PATH);
+        Config config=Utils.fromJson(Config.class, configFile);
+        try(Connection connex=databaseInfo.getConnection(credentials)){
+            DBEntity[] dbentities=databaseInfo.getDBEntities(credentials, nomEntite, connex);
+            Entity[] entities=new Entity[dbentities.length];
+            File file;
+            String fileContent;
+            FormEntity formEntity=new FormEntity();
+            for(int i=0;i<entities.length;i++){
+                entities[i]=dbentities[i].getEntity(language, config.getDefaultPackage());
+                fileContent=formEntity.generateViewpage(framework, dbentities[i], config.getProject(), config.getDefaultPackage(), Constantes.FACADE_PATH);
+                file=new File(config.getViewpageSavepath()+"/"+dbentities[i].getClassName()+framework.getFacadeExtension());
+                Utils.createFile(file.getPath());
+                Utils.overwriteFileContent(file.getPath(), fileContent);
+            }
+        }
+    }
     public static void main(String[] args) throws Exception {
         try(Scanner scanner=new Scanner(System.in)){
             generateModels(scanner);
             generateController(scanner);
+            generateViewPage(scanner);
         }
     }
 }
