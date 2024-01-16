@@ -1,0 +1,32 @@
+{
+    "int":{
+        "file":"number.comp",
+        "type":"number",
+        "step":1
+    },
+    "double":{
+        "file":"number.comp",
+        "type":"number",
+        "step":0.01
+    },
+    "boolean":{
+        "file":"check.comp",
+        "type":"check",
+        "step":0
+    },
+    "string":{
+        "file":"plain.comp",
+        "type":"text",
+        "step":0
+    },
+    "date":{
+        "file":"plain.comp",
+        "type":"date",
+        "step":0
+    },
+    "timestamp":{
+        "file":"plain.comp",
+        "type":"datetime-local",
+        "step":0
+    }
+}

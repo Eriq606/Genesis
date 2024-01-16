@@ -1,0 +1,7 @@
+<div class="form-floating mb-3">
+    <select class="form-select" id="[field-name-min]Select"
+        aria-label="[fieldhelp]" name="[field-name-min]">
+        <option selected>All</option>
+    </select>
+    <label for="[field-name-min]Select">[field-name-maj]</label>
+</div>

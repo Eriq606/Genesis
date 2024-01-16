@@ -1,0 +1,1 @@
+<td><%= o.get[field-name-maj]() %></td>

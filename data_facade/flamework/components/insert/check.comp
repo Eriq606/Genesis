@@ -1,0 +1,4 @@
+<div class="mb-3 form-check">
+    <input type="checkbox" class="form-check-input" id="[field-name-min]check" name="[field-name-min]">
+    <label class="form-check-label" for="[field-name-min]check">[field-name-maj]</label>
+</div>

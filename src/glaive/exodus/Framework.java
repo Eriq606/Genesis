@@ -22,6 +22,57 @@ public class Framework {
     private FrameworkMethod[] methods;
     private String template;
     private String extension;
+    private String facadeTemplate,formwithlistTemplate, insertTemplatePath, updateTemplatePath, listElementTemplate, listHeaderTemplate;
+    private boolean rest;
+    private String facadeExtension;
+    public String getFacadeExtension() {
+        return facadeExtension;
+    }
+    public void setFacadeExtension(String facadeExtension) {
+        this.facadeExtension = facadeExtension;
+    }
+    public String getFacadeTemplate() {
+        return facadeTemplate;
+    }
+    public void setFacadeTemplate(String facadeTemplate) {
+        this.facadeTemplate = facadeTemplate;
+    }
+    public String getFormwithlistTemplate() {
+        return formwithlistTemplate;
+    }
+    public void setFormwithlistTemplate(String formwithlistTemplate) {
+        this.formwithlistTemplate = formwithlistTemplate;
+    }
+    public String getInsertTemplatePath() {
+        return insertTemplatePath;
+    }
+    public void setInsertTemplatePath(String insertTemplatePath) {
+        this.insertTemplatePath = insertTemplatePath;
+    }
+    public String getUpdateTemplatePath() {
+        return updateTemplatePath;
+    }
+    public void setUpdateTemplatePath(String updateTemplatePath) {
+        this.updateTemplatePath = updateTemplatePath;
+    }
+    public String getListElementTemplate() {
+        return listElementTemplate;
+    }
+    public void setListElementTemplate(String listElementTemplate) {
+        this.listElementTemplate = listElementTemplate;
+    }
+    public String getListHeaderTemplate() {
+        return listHeaderTemplate;
+    }
+    public void setListHeaderTemplate(String listHeaderTemplate) {
+        this.listHeaderTemplate = listHeaderTemplate;
+    }
+    public boolean isRest() {
+        return rest;
+    }
+    public void setRest(boolean rest) {
+        this.rest = rest;
+    }
     public String getExtension() {
         return extension;
     }

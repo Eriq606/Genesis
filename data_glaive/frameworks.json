@@ -163,7 +163,15 @@
             }
         ],
         "template":"Controller",
-        "extension":".java"
+        "extension":".java",
+        "facadeTemplate":"flamework",
+        "formwithlistTemplate":"formwithlist.templ",
+        "insertTemplatePath":"components/insert",
+        "updateTemplatePath":"components/update",
+        "listElementTemplate":"components/list-element.templ",
+        "listHeaderTemplate":"components/list-header.templ",
+        "rest":false,
+        "facadeExtension":".jsp"
     },
     {
         "id":2,
@@ -306,6 +314,14 @@
             }
         ],
         "template":"Controller",
-        "extension":".java"
+        "extension":".java",
+        "facade_template":"",
+        "formwithlistTemplate":"",
+        "insertTemplatePath":"",
+        "updateTemplatePath":"",
+        "listElementTemplate":"",
+        "listHeaderTemplate":"",
+        "rest":true,
+        "facadeExtension":""
     }
 ]

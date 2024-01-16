@@ -6,7 +6,7 @@ public class Constantes {
     public static final String CREDENTIAL_PATH="/database_credentials.json";
     public static final String DATABASEINFO_PATH="/data_glaive/databases.json";
     public static final String LANGUAGE_PATH="/data_glaive/languages.json";
-    public static final String FRAMEWORK_PATH="/data_exodus/frameworks.json";
+    public static final String FRAMEWORK_PATH="/data_glaive/frameworks.json";
     public static final String CLASS_TEMPLATE_PATH="/data_genesis";
     public static final String CONTROLLER_TEMPLATE_PATH="/data_exodus";
     public static final String TEMPLATE_EXTENSION=".templ";
@@ -18,4 +18,6 @@ public class Constantes {
     public static final String METHOD_TEMPLATE_SUFFIX="__method";
     public static final String FLAMEWORK_INSTANCE_TEMPLATE_SUFFIX="__object_instanciation_flamework";
     public static final String SPRING_INSTANCE_TEMPLATE_SUFFIX="__object_instanciation_spring";
+    public static final String FACADE_PATH="/data_facade";
+    public static final String FORMFIELD_JSON_PATH="/data_facade/formfield_type.json";
 }
