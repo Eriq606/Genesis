@@ -1,4 +1,5 @@
 {
     "defaultPackage":"modeles",
-    "classSavepath":"./src/modeles"
+    "classSavepath":"./src/modeles",
+    "controllerSavepath":"./src/modeles"
 }
