@@ -21,6 +21,11 @@ import handyman.Utils;
 
 public class App {
     public static void generateModels(Scanner scanner) throws Exception {
+        System.out.print("Generer un modele?(O/n): ");
+        String choice=scanner.next();
+        if(choice.equalsIgnoreCase("n")){
+            return;
+        }
         String databases=Utils.getFileContentFromInsideJar(DatabaseInfo.class, Constantes.DATABASEINFO_PATH);
         DatabaseInfo[] databasesInfos=Utils.fromJson(DatabaseInfo[].class, databases);
         int sgbd=0;
@@ -73,6 +78,11 @@ public class App {
         }
     }
     public static void generateController(Scanner scanner) throws IOException, ClassNotFoundException, SQLException, FormatterException{
+        System.out.print("Generer un controller?(O/n): ");
+        String choice=scanner.next();
+        if(choice.equalsIgnoreCase("n")){
+            return;
+        }
         String frameworksFile=Utils.getFileContentFromInsideJar(Framework.class, Constantes.FRAMEWORK_PATH);
         Framework[] frameworks=Utils.fromJson(Framework[].class, frameworksFile);
         String databases=Utils.getFileContentFromInsideJar(DatabaseInfo.class, Constantes.DATABASEINFO_PATH);
@@ -120,6 +130,11 @@ public class App {
         }
     }
     public static void generateViewPage(Scanner scanner) throws IOException, ClassNotFoundException, SQLException, FormatterException{
+        System.out.print("Generer une page web?(O/n): ");
+        String choice=scanner.next();
+        if(choice.equalsIgnoreCase("n")){
+            return;
+        }
         String frameworksFile=Utils.getFileContentFromInsideJar(Framework.class, Constantes.FRAMEWORK_PATH);
         Framework[] frameworks=Utils.fromJson(Framework[].class, frameworksFile);
         String databases=Utils.getFileContentFromInsideJar(DatabaseInfo.class, Constantes.DATABASEINFO_PATH);
