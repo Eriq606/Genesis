@@ -2,6 +2,7 @@ package glaive;
 import java.io.IOException;
 import java.util.Map;
 
+import glaive.genesis.LanguageFile;
 import handyman.Utils;
 
 public class Entity {
@@ -116,5 +117,11 @@ public class Entity {
         classTemplate=classTemplate.replace("[class-annotations]", generateClassAnnotations(langage, templatePath));
         classTemplate=classTemplate.replace("[fields]", generateAllFields(langage, templatePath));
         return classTemplate;
+    }
+    public String generateAdditionnalFile(LanguageFile file, String defaultPackage){
+        String fileContent=file.getContent();
+        fileContent=fileContent.replace("[default-package]", defaultPackage);
+        fileContent=fileContent.replace("[class-name-maj]", getClassName());
+        return fileContent;
     }
 }

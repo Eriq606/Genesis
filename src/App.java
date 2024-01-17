@@ -16,6 +16,7 @@ import glaive.Entity;
 import glaive.Language;
 import glaive.exodus.Framework;
 import glaive.facade.FormEntity;
+import glaive.genesis.LanguageFile;
 import handyman.Utils;
 
 public class App {
@@ -54,12 +55,20 @@ public class App {
             File file;
             String fileContent;
             Formatter formatter=new Formatter();
+            String additionnalFileName;
             for(int i=0;i<entities.length;i++){
                 entities[i]=dbEntities[i].getEntity(language, config.getDefaultPackage());
                 file=new File(config.getClassSavepath()+"/"+entities[i].getClassName()+language.getExtension());
                 Utils.createFile(file.getPath());
                 fileContent=entities[i].generateClassFileContent(language, Constantes.CLASS_TEMPLATE_PATH);
                 Utils.overwriteFileContent(file.getPath(), formatter.formatSource(fileContent));
+                for(LanguageFile lf:language.getAdditionnalFiles()){
+                    additionnalFileName=lf.getName().replace("[class-name-maj]", Utils.majStart(entities[i].getClassName()));
+                    file=new File(config.getClassSavepath()+"/"+additionnalFileName);
+                    Utils.createFile(file.getPath());
+                    fileContent=entities[i].generateAdditionnalFile(lf, config.getDefaultPackage());
+                    Utils.overwriteFileContent(file.getPath(), fileContent);
+                }
             }
         }
     }

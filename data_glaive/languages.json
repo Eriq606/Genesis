@@ -48,7 +48,8 @@
             "PrimaryKey"
         ],
         "template":"POO",
-        "extension":".java"
+        "extension":".java",
+        "additionnalFiles":[]
     },
     {
         "id":2,
@@ -102,7 +103,13 @@
             "GeneratedValue(Strategy=GenerationType.AUTO)"
         ],
         "template":"POO",
-        "extension":".java"
+        "extension":".java",
+        "additionnalFiles":[
+            {
+                "name":"[class-name-maj]Repository.java",
+                "content":"package [default-package];\nimport org.springframework.data.repository.CrudRepository;\npublic interface [class-name-maj]Repository extends CrudRepository<[class-name-maj], Integer>{}"
+            }
+        ]
     },
     {
         "id":3,

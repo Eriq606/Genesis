@@ -2,6 +2,7 @@ package glaive;
 import java.io.IOException;
 import java.util.HashMap;
 
+import glaive.genesis.LanguageFile;
 import handyman.Utils;
 
 public class Language {
@@ -13,6 +14,13 @@ public class Language {
     private String[] classAnnotations, fieldAnnotations, primaryFieldAnnotations;
     private String template;
     private String extension;
+    private LanguageFile[] additionnalFiles;
+    public LanguageFile[] getAdditionnalFiles() {
+        return additionnalFiles;
+    }
+    public void setAdditionnalFiles(LanguageFile[] additionnalFiles) {
+        this.additionnalFiles = additionnalFiles;
+    }
     public String getExtension() {
         return extension;
     }
