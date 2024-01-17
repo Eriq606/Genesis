@@ -252,6 +252,9 @@ public class Framework {
         String flameworkInstanciation="";
         String flameworkInstanceLine;
         for(EntityField e:entity.getFields()){
+            if(e.isPrimary()){
+                continue;
+            }
             flameworkInstanceLine=flameworkInstanceTemplate;
             flameworkInstanceLine=flameworkInstanceLine.replace("[field-name-min]", Utils.minStart(e.getName()));
             flameworkInstanceLine=flameworkInstanceLine.replace("[field-name-maj]", Utils.majStart(e.getName()));
