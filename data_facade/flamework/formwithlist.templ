@@ -4,7 +4,7 @@
 %>
 <div class="container-fluid pt-4 px-4">
     <div class="row g-4">
-        <div class="col-sm-12 col-xl-6">
+        <div class="col-sm-12 col-xl-6 offset-3">
             <div class="bg-secondary rounded h-100 p-4">
                 <h6 class="mb-4">Liste de [class-name-maj]</h6>
                 <table class="table">
@@ -18,11 +18,11 @@
                             <tr>
                                 [list-element]
                                 <td>
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modifiermodal">
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modifiermodal<%= o.getId() %>">
                                         <p><i class="bi bi-pencil"></i>Modifier</p>
                                     </button>
-                                    <div class="modal fade" id="modifiermodal" tabindex="-1" aria-labelledby="modifiermodalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
+                                    <div class="modal fade" id="modifiermodal<%= o.getId() %>" tabindex="-1" aria-labelledby="modifiermodalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                         <form action="/[project-name-maj]/update[class-name-min].do" method="put">
                                         <div class="modal-header">
@@ -34,7 +34,7 @@
                                             [fields-update]
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Valider</button>
+                                            <button type="submit" class="btn btn-primary">Valider</button>
                                         </div>
                                         </form>
                                         </div>
@@ -51,16 +51,16 @@
                         <% } %>
                     </tbody>
                 </table>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ajoutmodal">
+                    <p><i class="bi bi-plus"></i>Ajouter</p>
+                </button>
             </div>
         </div>
         <!-- Button modal ajout -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ajoutmodal">
-            <p><i class="bi bi-plus"></i>Ajouter</p>
-        </button>
 
         <!-- Modal Ajout -->
         <div class="modal fade" id="ajoutmodal" tabindex="-1" aria-labelledby="ajoutmodalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
             <form action="/[project-name-maj]/insert[class-name-min].do" method="post">
             <div class="modal-header">
@@ -71,7 +71,7 @@
                 [fields-insert]
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Valider</button>
+                <button type="submit" class="btn btn-primary">Valider</button>
             </div>
             </form>
             </div>

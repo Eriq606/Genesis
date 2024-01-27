@@ -6,6 +6,7 @@ import java.util.Map;
 
 import glaive.Constantes;
 import glaive.Credentials;
+import glaive.DBEntity;
 import glaive.DatabaseInfo;
 import glaive.Entity;
 import glaive.EntityField;
@@ -238,7 +239,7 @@ public class Framework {
         parameterTemplate=parameterTemplate.replace("[parameter-name]", parameter.getName());
         return parameterTemplate;
     }
-    public String generateMethodContent(DatabaseInfo database, Credentials credentials, Entity entity, String template, String templatePath) throws IOException{
+    public String generateMethodContent(DatabaseInfo database, Credentials credentials, Entity entity, DBEntity dbentity, String template, String templatePath) throws IOException{
         template=template.replace("[database-name]", credentials.getDatabaseName());
         template=template.replace("[host]", credentials.getHost());
         template=template.replace("[port]", credentials.getPort());
@@ -251,14 +252,17 @@ public class Framework {
         String flameworkInstanceTemplate=Utils.getFileContentFromInsideJar(Framework.class, templatePath+"/"+getTemplate()+Constantes.FLAMEWORK_INSTANCE_TEMPLATE_SUFFIX+Constantes.TEMPLATE_EXTENSION);
         String flameworkInstanciation="";
         String flameworkInstanceLine;
-        for(EntityField e:entity.getFields()){
-            if(e.isPrimary()){
+        String dateParsing;
+        for(int i=0;i<entity.getFields().length;i++){
+            if(entity.getFields()[i].isPrimary()){
                 continue;
             }
             flameworkInstanceLine=flameworkInstanceTemplate;
-            flameworkInstanceLine=flameworkInstanceLine.replace("[field-name-min]", Utils.minStart(e.getName()));
-            flameworkInstanceLine=flameworkInstanceLine.replace("[field-name-maj]", Utils.majStart(e.getName()));
-            flameworkInstanceLine=flameworkInstanceLine.replace("[field-type]", e.getType());
+            flameworkInstanceLine=flameworkInstanceLine.replace("[field-name-min]", Utils.minStart(entity.getFields()[i].getName()));
+            flameworkInstanceLine=flameworkInstanceLine.replace("[field-name-maj]", Utils.majStart(entity.getFields()[i].getName()));
+            flameworkInstanceLine=flameworkInstanceLine.replace("[field-type]", entity.getFields()[i].getType());
+            dateParsing=dbentity.getFields()[i].getType().equals("timestamp")?(".replace(\"T\", \" \")"+"+\":00\""):"";
+            flameworkInstanceLine=flameworkInstanceLine.replace("[date-parsing]", dateParsing);
             flameworkInstanceLine+="\n";
             flameworkInstanciation+=flameworkInstanceLine;
         }
@@ -278,7 +282,7 @@ public class Framework {
         template=template.replace("[instanciation-spring]", springInstanciation);
         return template;
     }
-    public String generateControllerMethod(FrameworkMethod method, DatabaseInfo database, Credentials credentials, Entity entity, String templatePath) throws IOException{
+    public String generateControllerMethod(FrameworkMethod method, DatabaseInfo database, Credentials credentials, Entity entity, DBEntity dbentity, String templatePath) throws IOException{
         String methodTemplate=getControllerMethodTemplate(templatePath);
         String methodAnnotationTemplate=getControllerAnnotationTemplate(templatePath);
         String methodAnnotationUnit;
@@ -311,11 +315,11 @@ public class Framework {
         methodTemplate=methodTemplate.replace("[thrown-items]", thrownItems);
         methodTemplate=methodTemplate.replace("[bracket-start]", getParams().get("bracket-start"));
         methodTemplate=methodTemplate.replace("[method-content]", method.getMethodContent());
-        methodTemplate=generateMethodContent(database, credentials, entity, methodTemplate, templatePath);
+        methodTemplate=generateMethodContent(database, credentials, entity, dbentity, methodTemplate, templatePath);
         methodTemplate=methodTemplate.replace("[bracket-end]", getParams().get("bracket-end"));
         return methodTemplate;
     }
-    public String generateController(Entity entity, DatabaseInfo database, Credentials credentials, String templatePath) throws IOException{
+    public String generateController(Entity entity, DBEntity dbentity, DatabaseInfo database, Credentials credentials, String templatePath) throws IOException{
         String controller=getControllerTemplate(templatePath);
         for(Map.Entry<String, String> entry:getParams().entrySet()){
             controller=controller.replace("["+entry.getKey()+"]", entry.getValue());
@@ -335,7 +339,7 @@ public class Framework {
         controller=controller.replace("[parameters-setup]", generateControllerInstanciation(getConstructor(), templatePath));
         String methods="";
         for(FrameworkMethod m:getMethods()){
-            methods+=generateControllerMethod(m, database, credentials, entity, templatePath);
+            methods+=generateControllerMethod(m, database, credentials, entity, dbentity, templatePath);
             methods+="\n";
         }
         controller=controller.replace("[methods]", methods);

@@ -122,7 +122,7 @@ public class App {
             Formatter formatter=new Formatter();
             for(int i=0;i<entities.length;i++){
                 entities[i]=dbentities[i].getEntity(language, config.getDefaultPackage());
-                fileContent=framework.generateController(entities[i], databaseInfo, credentials, Constantes.CONTROLLER_TEMPLATE_PATH);
+                fileContent=framework.generateController(entities[i], dbentities[i], databaseInfo, credentials, Constantes.CONTROLLER_TEMPLATE_PATH);
                 file=new File(config.getControllerSavepath()+"/"+entities[i].getClassName()+framework.getParams().get("controller-suffix")+framework.getExtension());
                 Utils.createFile(file.getPath());
                 Utils.overwriteFileContent(file.getPath(), formatter.formatSource(fileContent));
